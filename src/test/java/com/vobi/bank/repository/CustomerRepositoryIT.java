@@ -1,0 +1,56 @@
+package com.vobi.bank.repository;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.vobi.bank.domain.Customer;
+import com.vobi.bank.domain.DocumentType;
+
+@SpringBootTest
+class CustomerRepositoryIT {
+	
+	@Autowired
+	CustomerRepository customerRepository;
+	
+	@Autowired
+	DocumentTypeRepository documentTypeRepository;
+	
+	@Test
+	void debeValidarLasDependencias() {
+		assertNotNull(customerRepository);
+		assertNotNull(documentTypeRepository);
+	}
+	
+	@Test
+	void debeCrearUnCustomer() {
+		
+		//Arrage
+		Integer iddocumentType = 1;
+		Integer idCustomer = 14836554;
+		
+		Customer customer = null;
+		DocumentType documentType = documentTypeRepository.findById(iddocumentType).get();
+		
+		customer = new Customer();
+		customer.setAddress("Avenida siempre viva 123");
+		customer.setCustId(idCustomer);
+		customer.setDocumentType(documentType);
+		customer.setEmail("hjsimposon@gmail.com");
+		customer.setEnable("Y");
+		customer.setName("Homero J Simpson");
+		customer.setPhone("5555555555");
+		customer.setToken("asdfsdafasdfasdfasdf");
+		
+		//Act
+		
+		customer = customerRepository.save(customer);
+		
+		//Assert
+		
+		assertNotNull(customer, "El customer es nulo no se pudo grabar");
+	}
+
+}
