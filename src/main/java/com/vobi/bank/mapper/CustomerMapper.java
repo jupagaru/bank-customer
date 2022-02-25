@@ -9,7 +9,7 @@ import com.vobi.bank.domain.Customer;
 import com.vobi.bank.dto.CustomerDTO;
 
 @Mapper
-public interface CustomerMapper {
+public interface CustomerMapper {	
 	
 	@Mapping(source = "documentType.dotyId" , target ="dotyId" )
 	public CustomerDTO customerToCustomerDTO(Customer customer);
@@ -22,3 +22,4 @@ public interface CustomerMapper {
 	public List<Customer> customerDTOListToCustomerList(List<CustomerDTO> customerDTOs);
 
 }
+ 
